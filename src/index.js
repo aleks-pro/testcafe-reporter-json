@@ -1,8 +1,8 @@
-import uuid from 'uuid';
-import sendCommand from './send-resove-command'
+const uuid = require('uuid');
+const sendCommand = require('./send-resove-command');
 
 export default function () {
-    const id = uuid(),
+    const id = uuid();
 
     return {
         async reportTaskStart (startTime, userAgents, testCount) {
