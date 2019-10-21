@@ -1,54 +1,28 @@
+import uuid from 'uuid';
+import sendCommand from './send-resove-command'
+
 export default function () {
+    const id = uuid(),
+
     return {
-        noColors:       true,
-        currentFixture: null,
-
-        report: {
-            startTime:  null,
-            endTime:    null,
-            userAgents: null,
-            passed:     0,
-            total:      0,
-            skipped:    0,
-            fixtures:   [],
-            warnings:   []
+        async reportTaskStart (startTime, userAgents, testCount) {
+            await sendCommand(id, 'reportTaskStart', { startTime, userAgents, testCount });
         },
 
-        reportTaskStart (startTime, userAgents, testCount) {
-            this.report.startTime  = startTime;
-            this.report.userAgents = userAgents;
-            this.report.total      = testCount;
+        async reportFixtureStart (name, path, meta) {
+            await sendCommand(id, 'reportFixtureStart', { name, path, meta });
         },
 
-        reportFixtureStart (name, path, meta) {
-            this.currentFixture = { name: name, path: path, meta: meta, tests: [] };
-            this.report.fixtures.push(this.currentFixture);
+        async reportTestStart (name, meta) {
+            await sendCommand(id, 'reportTestStart', { name, meta });
         },
 
-        reportTestDone (name, testRunInfo, meta) {
-            var errs = testRunInfo.errs.map(err => this.formatError(err));
-            
-            if (testRunInfo.skipped)
-                this.report.skipped++;
-
-            this.currentFixture.tests.push({
-                name: name,
-                meta: meta,
-                errs: errs,
-
-                durationMs:     testRunInfo.durationMs,
-                unstable:       testRunInfo.unstable,
-                screenshotPath: testRunInfo.screenshotPath,
-                skipped:        testRunInfo.skipped
-            });
+        async reportTestDone (name, testRunInfo, meta) {
+            await sendCommand(id, 'reportTestDone', { name, testRunInfo, meta });
         },
 
-        reportTaskDone (endTime, passed, warnings) {
-            this.report.passed   = passed;
-            this.report.endTime  = endTime;
-            this.report.warnings = warnings;
-
-            this.write(JSON.stringify(this.report, null, 2));
+        async reportTaskDone (endTime, passed, warnings, result) {
+            await sendCommand(id, 'reportTaskDone', { endTime, passed, warnings, result });
         }
     };
 }

@@ -1,20 +1,16 @@
-# testcafe-reporter-json
-[![Build Status](https://travis-ci.org/DevExpress/testcafe-reporter-json.svg)](https://travis-ci.org/DevExpress/testcafe-reporter-json)
+# testcafe-reporter-dashboard
+[![Build Status](https://travis-ci.org/aleks-pro/testcafe-reporter-dashboard.svg)](https://travis-ci.org/aleks-pro/testcafe-reporter-dashboard)
 
-This is the **JSON** reporter plugin for [TestCafe](http://devexpress.github.io/testcafe).
+This is the **dashboard** reporter plugin for [TestCafe](http://devexpress.github.io/testcafe).
 
 <p align="center">
-    <img src="https://raw.githubusercontent.com/DevExpress/testcafe-reporter-json/master/media/preview.png" alt="preview" />
+    <img src="https://raw.github.com/aleks-pro/testcafe-reporter-dashboard/master/media/preview.png" alt="preview" />
 </p>
 
 ## Install
 
-This reporter is shipped with TestCafe by default. In most cases, you won't need to install it separately.
-
-However, if you need to install this reporter, you can use the following command.
-
 ```
-npm install testcafe-reporter-json
+npm install testcafe-reporter-dashboard
 ```
 
 ## Usage
@@ -22,7 +18,7 @@ npm install testcafe-reporter-json
 When you run tests from the command line, specify the reporter name by using the `--reporter` option:
 
 ```
-testcafe chrome 'path/to/test/file.js' --reporter json
+testcafe chrome 'path/to/test/file.js' --reporter dashboard
 ```
 
 
@@ -33,9 +29,9 @@ testCafe
     .createRunner()
     .src('path/to/test/file.js')
     .browsers('chrome')
-    .reporter('json') // <-
+    .reporter('dashboard') // <-
     .run();
 ```
 
 ## Author
-Developer Express Inc. (https://devexpress.com)
+aleks-pro 
